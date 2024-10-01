@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Gurkiran Kaur</title>
+    <link rel="stylesheet" href="portfolio.css">
+    <script defer src="portfolio.js"></script> <!-- Linking the JavaScript file -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Gurkiran Kaur</h1>
+            <p>B.Tech in Computer Science | Aspiring Full-Stack Developer</p>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                I am Gurkiran Kaur, currently pursuing my B.Tech in Computer Science from Guru Tegh Bahadur Institute Of Technology. My expertise lies in web development, particularly in front-end frameworks such as React, and I am passionate about building user-centric, responsive, and visually appealing websites.
+                <br><br>
+                During my internship at Internship Studio, I successfully developed web applications and collaborated with cross-functional teams. I am now seeking to further expand my skills through new challenges, internships, or collaborative projects in the field of web development and software engineering.
+            </p>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2>Projects</h2>
+            <div id="projects-container">
+                <!-- Projects will be dynamically inserted using JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2>Skills</h2>
+            <ul>
+                <li>Programming Languages: C, Java</li>
+                <li>Web Development: HTML, CSS, JavaScript, React, Node.js</li>
+                <li>Database Management: MySQL</li>
+                <li>Tools & Platforms: Git, GitHub</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>Email: gurkirank64@gmail.com </p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/gurkiran-kaur-0308081b5/" target="_blank">Gurkiran kaur</a></p>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+                <p id="status"></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Gurkiran Kaur. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
