@@ -18,7 +18,7 @@ const projects = [
     {
         name: 'Portfolio Website',
         description: 'A personal portfolio website built with HTML, CSS, and JavaScript to showcase my skills and projects.',
-        link: 'https://github.com/yourusername/portfolio-website'
+        link: 'https://github.com/gurkirankaurr/My-portfolio'
     },
 ];
 
