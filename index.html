@@ -3,89 +3,774 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Gurkiran Kaur</title>
-    <link rel="stylesheet" href="index.css">
-    <script defer src="index.js"></script> <!-- Linking the JavaScript file -->
+    <title>Gurkiran Kaur — Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080810;
+            --surface: #0f0f1a;
+            --surface2: #16162a;
+            --accent: #7c6aff;
+            --accent2: #ff6a9b;
+            --accent3: #5fffd4;
+            --accent4: #ffd166;
+            --text: #eae8f5;
+            --muted: #6b688a;
+            --border: rgba(124,106,255,0.13);
+            --border-hover: rgba(124,106,255,0.4);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family:'DM Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height:100vh;
+        }
+
+        body::after {
+            content:''; position:fixed; inset:0; z-index:999; pointer-events:none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            opacity:0.5;
+        }
+
+        /* NAV */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:200;
+            display:flex; align-items:center; justify-content:space-between;
+            padding:1.1rem 4rem;
+            background:rgba(8,8,16,0.85);
+            backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; }
+        .nav-links a {
+            text-decoration:none; color:var(--muted);
+            font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;
+            transition:color 0.25s;
+        }
+        .nav-links a:hover { color:var(--text); }
+        .nav-cta {
+            padding:0.55rem 1.4rem;
+            border:1px solid var(--border); border-radius:4px;
+            font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
+            color:var(--accent); text-decoration:none;
+            transition:all 0.25s;
+        }
+        .nav-cta:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+        /* HERO */
+        #hero {
+            min-height:100vh;
+            display:grid; grid-template-columns:1fr 280px;
+            align-items:center; gap:4rem;
+            padding:8rem 4rem 4rem;
+            position:relative; overflow:hidden;
+        }
+        .orb {
+            position:absolute; border-radius:50%;
+            filter:blur(120px); pointer-events:none;
+        }
+        .orb1 { width:600px; height:600px; background:rgba(124,106,255,0.1); top:-150px; right:-100px; }
+        .orb2 { width:400px; height:400px; background:rgba(255,106,155,0.07); bottom:-100px; left:0; }
+        .orb3 { width:250px; height:250px; background:rgba(95,255,212,0.05); top:40%; left:40%; }
+
+        .hero-eyebrow {
+            font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase;
+            color:var(--accent3); margin-bottom:1.8rem;
+            display:flex; align-items:center; gap:0.9rem;
+        }
+        .hero-eyebrow::before {
+            content:''; display:block; width:2.5rem; height:1px;
+            background:var(--accent3);
+        }
+        h1 {
+            font-family:'Syne',sans-serif; font-weight:800;
+            font-size:clamp(3.2rem,7.5vw,6.5rem);
+            line-height:0.92; letter-spacing:-0.035em;
+        }
+        h1 .outline {
+            color:transparent;
+            -webkit-text-stroke: 1.5px var(--accent);
+        }
+        .hero-role {
+            font-family:'Instrument Serif',serif; font-style:italic;
+            font-size:clamp(1rem,2vw,1.35rem);
+            color:var(--muted); margin-top:1.6rem; max-width:520px;
+            line-height:1.65;
+        }
+        .hero-tags {
+            display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:1.4rem;
+        }
+        .tag {
+            padding:0.3rem 0.75rem;
+            background:rgba(124,106,255,0.08);
+            border:1px solid rgba(124,106,255,0.2);
+            border-radius:3px;
+            font-size:0.68rem; color:var(--muted); letter-spacing:0.08em;
+        }
+        .hero-btns {
+            display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap;
+        }
+        .btn {
+            padding:0.85rem 2.2rem; border-radius:4px;
+            font-family:'DM Mono',monospace; font-size:0.78rem;
+            letter-spacing:0.08em; text-transform:uppercase;
+            text-decoration:none; transition:all 0.25s; display:inline-block;
+            cursor:pointer; border:none;
+        }
+        .btn-primary { background:var(--accent); color:#fff; border:1px solid var(--accent); }
+        .btn-primary:hover { background:transparent; color:var(--accent); }
+        .btn-ghost { background:transparent; color:var(--muted); border:1px solid var(--border); }
+        .btn-ghost:hover { border-color:var(--accent3); color:var(--accent3); }
+
+        .photo-wrap {
+            position:relative; width:260px; height:300px; flex-shrink:0;
+            justify-self:end;
+        }
+        .photo-wrap::before {
+            content:''; position:absolute;
+            inset:-10px 0 0 -10px;
+            border:1px solid rgba(124,106,255,0.25);
+            border-radius:6px; transform:rotate(2.5deg);
+        }
+        .photo-wrap::after {
+            content:''; position:absolute;
+            inset:0 -10px -10px 0;
+            border:1px solid rgba(255,106,155,0.15);
+            border-radius:6px; transform:rotate(-1.5deg);
+        }
+        .photo-wrap img {
+            width:100%; height:100%; object-fit:cover;
+            border-radius:6px; position:relative; z-index:2;
+            filter:contrast(1.05) saturate(0.9);
+        }
+        .photo-badge {
+            position:absolute; bottom:-16px; right:-16px; z-index:3;
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:6px; padding:0.6rem 0.9rem;
+            font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase;
+            color:var(--accent3);
+        }
+
+        /* SECTIONS */
+        section { padding:6rem 4rem; position:relative; z-index:1; }
+        .sec-header {
+            display:flex; align-items:center; gap:1.2rem; margin-bottom:3.5rem;
+        }
+        .sec-num { font-size:0.65rem; color:var(--accent3); letter-spacing:0.18em; }
+        .sec-line { flex:1; height:1px; background:var(--border); }
+        h2 {
+            font-family:'Syne',sans-serif; font-weight:700;
+            font-size:clamp(1.4rem,2.8vw,2rem); letter-spacing:-0.02em;
+            white-space:nowrap;
+        }
+
+        /* TICKER */
+        .exp-bar {
+            background:var(--surface); border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+            padding:1rem 0; overflow:hidden; position:relative; z-index:1;
+        }
+        .ticker-track {
+            display:flex; gap:3rem; white-space:nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-item {
+            font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;
+            color:var(--muted); flex-shrink:0;
+        }
+        .ticker-item span { color:var(--accent); margin-right:1rem; }
+        @keyframes ticker {
+            from { transform:translateX(0); }
+            to { transform:translateX(-50%); }
+        }
+
+        /* ABOUT */
+        #about { background:var(--surface); }
+        .about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+        .about-text { font-size:0.85rem; line-height:1.95; color:var(--muted); }
+        .about-text p + p { margin-top:1.1rem; }
+        .hl { color:var(--text); }
+        .exp-cards { display:flex; flex-direction:column; gap:1rem; }
+        .exp-card {
+            background:var(--bg); border:1px solid var(--border);
+            border-radius:8px; padding:1.4rem;
+            transition:border-color 0.3s;
+        }
+        .exp-card:hover { border-color:var(--border-hover); }
+        .exp-card-top {
+            display:flex; justify-content:space-between; align-items:flex-start;
+            margin-bottom:0.5rem;
+        }
+        .exp-company {
+            font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem;
+        }
+        .exp-date { font-size:0.65rem; color:var(--accent3); letter-spacing:0.08em; }
+        .exp-role { font-size:0.72rem; color:var(--accent); margin-bottom:0.6rem; }
+        .exp-desc { font-size:0.75rem; color:var(--muted); line-height:1.6; }
+
+        /* PROJECTS */
+        #projects { background:var(--bg); }
+        .proj-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:1.2rem;
+        }
+        .proj-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:12px; padding:1.8rem;
+            position:relative; overflow:hidden;
+            transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            display:flex; flex-direction:column;
+        }
+        .proj-card::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(135deg,rgba(124,106,255,0.03) 0%,transparent 60%);
+            pointer-events:none;
+        }
+        .proj-card:hover {
+            transform:translateY(-5px);
+            border-color:var(--border-hover);
+            box-shadow:0 24px 64px rgba(124,106,255,0.1);
+        }
+        .proj-card.featured { grid-column:span 2; }
+        .proj-num {
+            position:absolute; top:1.4rem; right:1.6rem;
+            font-family:'Syne',sans-serif; font-weight:800;
+            font-size:2.8rem; line-height:1;
+            color:rgba(124,106,255,0.07);
+            pointer-events:none;
+        }
+        .proj-badge {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            padding:0.25rem 0.65rem;
+            border-radius:3px; font-size:0.62rem;
+            letter-spacing:0.1em; text-transform:uppercase;
+            margin-bottom:1rem; width:fit-content;
+        }
+        .badge-web { background:rgba(124,106,255,0.1); color:var(--accent); }
+        .badge-design { background:rgba(255,106,155,0.1); color:var(--accent2); }
+        .badge-game { background:rgba(95,255,212,0.1); color:var(--accent3); }
+        .badge-ai { background:rgba(255,209,102,0.1); color:var(--accent4); }
+        .badge-python { background:rgba(95,255,212,0.08); color:var(--accent3); }
+        .proj-card h3 {
+            font-family:'Syne',sans-serif; font-weight:700;
+            font-size:1.05rem; letter-spacing:-0.01em; margin-bottom:0.7rem;
+        }
+        .proj-card p {
+            font-size:0.78rem; line-height:1.72; color:var(--muted);
+            flex:1; margin-bottom:1.4rem;
+        }
+        .proj-stack {
+            display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.2rem;
+        }
+        .stack-tag {
+            padding:0.2rem 0.55rem;
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:3px; font-size:0.62rem; color:var(--muted);
+        }
+        .proj-links { display:flex; gap:1rem; align-items:center; margin-top:auto; }
+        .proj-link {
+            font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+            text-decoration:none; color:var(--accent);
+            display:flex; align-items:center; gap:0.35rem;
+            transition:gap 0.2s;
+        }
+        .proj-link:hover { gap:0.6rem; }
+        .proj-link.sec { color:var(--muted); }
+        .proj-link.sec:hover { color:var(--text); }
+
+        /* SKILLS */
+        #skills { background:var(--surface); }
+        .skills-wrap { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        .skill-group {
+            background:var(--bg); border:1px solid var(--border);
+            border-radius:8px; padding:1.4rem;
+            transition:border-color 0.3s;
+        }
+        .skill-group:hover { border-color:var(--border-hover); }
+        .sg-title {
+            font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase;
+            color:var(--accent3); margin-bottom:1rem;
+        }
+        .sg-tags { display:flex; flex-wrap:wrap; gap:0.45rem; }
+        .sg-tag {
+            padding:0.28rem 0.65rem;
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:3px; font-size:0.7rem; color:var(--text);
+        }
+
+        /* ACHIEVEMENTS */
+        #achievements { background:var(--bg); }
+        .ach-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        .ach-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:8px; padding:1.4rem;
+            transition:border-color 0.3s;
+        }
+        .ach-card:hover { border-color:var(--border-hover); }
+        .ach-icon { font-size:1.4rem; margin-bottom:0.6rem; }
+        .ach-title {
+            font-family:'Syne',sans-serif; font-weight:600;
+            font-size:0.88rem; margin-bottom:0.4rem;
+        }
+        .ach-sub { font-size:0.72rem; color:var(--muted); line-height:1.5; }
+        .ach-date { font-size:0.63rem; color:var(--accent3); margin-top:0.5rem; letter-spacing:0.08em; }
+
+        /* CONTACT */
+        #contact { background:var(--surface); }
+        .contact-inner { max-width:680px; margin:0 auto; text-align:center; }
+        .contact-headline {
+            font-family:'Instrument Serif',serif; font-style:italic;
+            font-size:clamp(2.2rem,4vw,3.2rem); line-height:1.15;
+            margin-bottom:1rem;
+        }
+        .contact-sub {
+            font-size:0.82rem; color:var(--muted); line-height:1.75;
+            margin-bottom:2.5rem;
+        }
+        .contact-links { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+        .c-link {
+            padding:0.9rem 2rem;
+            border-radius:4px; text-decoration:none;
+            font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+            transition:all 0.25s;
+        }
+        .c-link.primary { background:var(--accent); color:#fff; border:1px solid var(--accent); }
+        .c-link.primary:hover { background:transparent; color:var(--accent); }
+        .c-link.outline { color:var(--muted); border:1px solid var(--border); }
+        .c-link.outline:hover { border-color:var(--accent); color:var(--accent); }
+
+        /* FOOTER */
+        footer {
+            padding:1.8rem 4rem;
+            border-top:1px solid var(--border);
+            display:flex; justify-content:space-between; align-items:center;
+            font-size:0.7rem; color:var(--muted);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(28px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+        .fu { animation:fadeUp 0.7s ease forwards; }
+        .d1 { animation-delay:0.05s; opacity:0; }
+        .d2 { animation-delay:0.18s; opacity:0; }
+        .d3 { animation-delay:0.32s; opacity:0; }
+        .d4 { animation-delay:0.46s; opacity:0; }
+        .d5 { animation-delay:0.6s; opacity:0; }
+
+        /* RESPONSIVE */
+        @media(max-width:1100px) {
+            .proj-grid { grid-template-columns:repeat(2,1fr); }
+            .proj-card.featured { grid-column:span 2; }
+        }
+        @media(max-width:900px) {
+            nav { padding:1rem 1.5rem; }
+            .nav-links { display:none; }
+            #hero { grid-template-columns:1fr; padding:7rem 1.5rem 3rem; gap:2.5rem; }
+            .photo-wrap { width:180px; height:210px; order:-1; }
+            section { padding:4rem 1.5rem; }
+            .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+            .skills-wrap { grid-template-columns:repeat(2,1fr); }
+            .ach-grid { grid-template-columns:1fr 1fr; }
+            footer { flex-direction:column; gap:0.6rem; text-align:center; padding:1.5rem; }
+        }
+        @media(max-width:650px) {
+            .proj-grid { grid-template-columns:1fr; }
+            .proj-card.featured { grid-column:span 1; }
+            .skills-wrap { grid-template-columns:1fr; }
+            .ach-grid { grid-template-columns:1fr; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-text">
-                    <h1>Gurkiran Kaur</h1>
-                    <p>B.Tech in Computer Science | Aspiring Full-Stack Developer</p>
+
+<!-- NAV -->
+<nav>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:gurkirank64@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div>
+        <div class="hero-eyebrow fu d1">B.Tech CSE · GTBIT, New Delhi · CGPA 8.3</div>
+        <h1 class="fu d2">Gurkiran<br><span class="outline">Kaur.</span></h1>
+        <p class="hero-role fu d3">
+            Full-Stack Developer &amp; UI/UX Designer crafting responsive web experiences — from AI-powered apps to interactive games.
+        </p>
+        <div class="hero-tags fu d4">
+            <span class="tag">React.js</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Figma</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Python</span>
+        </div>
+        <div class="hero-btns fu d5">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="https://github.com/gurkirankaurr" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/gurkiran-kaur-0308081b5/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+        </div>
+    </div>
+    <div class="photo-wrap fu d3">
+        <img src="./profile_photo.jpeg" alt="Gurkiran Kaur">
+        <div class="photo-badge">Open to Roles</div>
+    </div>
+</section>
+
+<!-- TICKER -->
+<div class="exp-bar">
+    <div class="ticker-track">
+        <div class="ticker-item"><span>✦</span> Web Developer Intern @ Digitals Daddy</div>
+        <div class="ticker-item"><span>✦</span> React Developer Intern @ TheGoodGameTheory</div>
+        <div class="ticker-item"><span>✦</span> IBM SkillsBuild Certified</div>
+        <div class="ticker-item"><span>✦</span> Udemy Full Stack Bootcamp</div>
+        <div class="ticker-item"><span>✦</span> B.Tech CSE · CGPA 8.3</div>
+        <div class="ticker-item"><span>✦</span> Available for Internships</div>
+        <div class="ticker-item"><span>✦</span> Web Developer Intern @ Digitals Daddy</div>
+        <div class="ticker-item"><span>✦</span> React Developer Intern @ TheGoodGameTheory</div>
+        <div class="ticker-item"><span>✦</span> IBM SkillsBuild Certified</div>
+        <div class="ticker-item"><span>✦</span> Udemy Full Stack Bootcamp</div>
+        <div class="ticker-item"><span>✦</span> B.Tech CSE · CGPA 8.3</div>
+        <div class="ticker-item"><span>✦</span> Available for Internships</div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="sec-header">
+        <span class="sec-num">01</span>
+        <h2>About Me</h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="about-grid">
+        <div class="about-text">
+            <p>I'm <span class="hl">Gurkiran Kaur</span>, a Computer Science Engineering student at <span class="hl">Guru Tegh Bahadur Institute of Technology, New Delhi</span> (graduating June 2026, CGPA 8.3). I build things for the web — from pixel-perfect UI to full-stack applications that actually ship.</p>
+            <p>Currently interning as a <span class="hl">Web Developer at Digitals Daddy</span> in Gurugram, where I'm building and deploying live agriculture-focused e-commerce platforms using Next.js, managing VPS servers, and designing complete UI flows in Figma.</p>
+            <p>Previously at <span class="hl">TheGoodGameTheory</span> as a React Developer Intern, where I built the Mystery Block Game and collaborated with designers to implement responsive, Figma-based UIs.</p>
+            <p>I'm passionate about building products that are <span class="hl">fast, beautiful, and genuinely useful</span> — and I'm always looking for the next challenge.</p>
+        </div>
+        <div>
+            <div class="exp-cards">
+                <div class="exp-card">
+                    <div class="exp-card-top">
+                        <div class="exp-company">Digitals Daddy</div>
+                        <div class="exp-date">Mar 2026 – Present</div>
+                    </div>
+                    <div class="exp-role">Web Developer Intern · On-site, Gurugram</div>
+                    <div class="exp-desc">Building live e-commerce platforms with Next.js, Figma UI design, and VPS deployment.</div>
                 </div>
-                <div class="profile-photo">
-                    <img src="profile_photo.jpeg" alt="Gurkiran Kaur Photo">
+                <div class="exp-card">
+                    <div class="exp-card-top">
+                        <div class="exp-company">TheGoodGameTheory</div>
+                        <div class="exp-date">Jan 2025 – Mar 2025</div>
+                    </div>
+                    <div class="exp-role">React Developer Intern · Remote</div>
+                    <div class="exp-desc">Built Mystery Block Game in React.js with interactive animations and modular component architecture.</div>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-card-top">
+                        <div class="exp-company">GTBIT, New Delhi</div>
+                        <div class="exp-date">Nov 2022 – Jun 2026</div>
+                    </div>
+                    <div class="exp-role">B.Tech — Computer Science Engineering</div>
+                    <div class="exp-desc">CGPA 8.3/10 · Active in web dev clubs and coding contests.</div>
                 </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
         </div>
-    </header>
-    
+    </div>
+</section>
 
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>
-                I am Gurkiran Kaur, currently pursuing my B.Tech in Computer Science from Guru Tegh Bahadur Institute Of Technology. Aspiring web developer with hands-on experience in building responsive and interactive user interfaces. Passionate about
-creating seamless web experiences through personal projects, including an e-commerce platform and interactive game to
-strengthen real-world skills. Eager to contribute to impactful projects while learning from experienced teams in a collaborative
-environment.
-                <br><br>
-                During my internship at Internship Studio, I successfully developed web applications and collaborated with cross-functional teams. I am now seeking to further expand my skills through new challenges, internships, or collaborative projects in the field of web development and software engineering.
-            </p>
-        </div>
-    </section>
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="sec-header">
+        <span class="sec-num">02</span>
+        <h2>Projects</h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="proj-grid">
 
-    <section id="projects" class="projects-section">
-        <div class="container">
-            <h2>Projects</h2>
-            <div id="projects-container">
-                <!-- Projects will be dynamically inserted using JavaScript -->
+        <!-- 1. Visual Product Matcher (featured) -->
+        <div class="proj-card featured">
+            <span class="proj-num">01</span>
+            <div class="proj-badge badge-ai">✦ Full-Stack · AI</div>
+            <h3>Visual Product Matcher</h3>
+            <p>A full-stack web app enabling users to search for products via text or image upload. Uses Multer for image handling, RESTful APIs with Express.js, and a cosine similarity algorithm for visual product matching with optimised async API handling.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">React.js</span>
+                <span class="stack-tag">Node.js</span>
+                <span class="stack-tag">Express.js</span>
+                <span class="stack-tag">Multer</span>
+                <span class="stack-tag">JavaScript</span>
+                <span class="stack-tag">Vercel</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://visual-product-matcher-umber.vercel.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr" target="_blank" class="proj-link sec">GitHub</a>
             </div>
         </div>
-    </section>
 
-    <section id="skills" class="skills-section">
-        <div class="container">
-            <h2>Skills</h2>
-            <ul>
-                <li>Languages : JavaScript, TypeScript, Java, HTML, CSS</li>
-                <li>Frameworks : React.js, Node.js, Express.js</li>
-                <li>Databases : MongoDB, MySQL</li>
-                <li>Dev Tools : Git, GitHub, Visual Studio Code</li>
-                <li>Design Tools : Figma, Canva</li>
-            </ul>
+        <!-- 2. Mystery Blocks Game -->
+        <div class="proj-card">
+            <span class="proj-num">02</span>
+            <div class="proj-badge badge-game">✦ Game · React</div>
+            <h3>Mystery Blocks Game</h3>
+            <p>A logic-based image puzzle game built during internship at TheGoodGameTheory. Users solve challenges by selecting the correct option — smooth animations, responsive design, modular React components.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">React.js</span>
+                <span class="stack-tag">React Hooks</span>
+                <span class="stack-tag">Animations</span>
+                <span class="stack-tag">Vercel</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://mystery-blocks-game.vercel.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr" target="_blank" class="proj-link sec">GitHub</a>
+            </div>
         </div>
-    </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2>Contact</h2>
-            <p>Email: gurkirank64@gmail.com </p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/gurkiran-kaur-0308081b5/" target="_blank">Gurkiran kaur</a></p>
-            <form id="contact-form">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send</button>
-                <p id="status"></p>
-            </form>
+        <!-- 3. Movie Recommender -->
+        <div class="proj-card">
+            <span class="proj-num">03</span>
+            <div class="proj-badge badge-python">✦ Python · ML</div>
+            <h3>Movie Recommender</h3>
+            <p>An interactive movie recommendation web app built with Streamlit. Suggests films based on user preferences using content-based filtering and similarity algorithms to analyse viewing patterns.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">Python</span>
+                <span class="stack-tag">Streamlit</span>
+                <span class="stack-tag">Content Filtering</span>
+                <span class="stack-tag">ML</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://movie-recommender-bsj2bsngypmgnbqumok4a5.streamlit.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr" target="_blank" class="proj-link sec">GitHub</a>
+            </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Gurkiran Kaur. All rights reserved.</p>
+        <!-- 4. Style Fusion (featured) -->
+        <div class="proj-card featured">
+            <span class="proj-num">04</span>
+            <div class="proj-badge badge-web">✦ Front-end · E-Commerce</div>
+            <h3>Style Fusion E-Commerce</h3>
+            <p>A fully responsive e-commerce website for fashion enthusiasts — curated collection of men's and women's clothing, watches, and sneakers. Features product filtering, cart functionality, and a seamless shopping experience optimised for mobile.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">HTML</span>
+                <span class="stack-tag">CSS</span>
+                <span class="stack-tag">JavaScript</span>
+                <span class="stack-tag">Responsive Design</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://style-fusion-e-commerce-website.vercel.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr/Style-Fusion-ECommerce-Website" target="_blank" class="proj-link sec">GitHub</a>
+            </div>
         </div>
-    </footer>
+
+        <!-- 5. Farmer E-Commerce Mobile UI -->
+        <div class="proj-card">
+            <span class="proj-num">05</span>
+            <div class="proj-badge badge-design">✦ UI/UX · Figma</div>
+            <h3>Farmer E-Commerce Mobile UI</h3>
+            <p>Mobile-first UI/UX design for a farmer-focused e-commerce platform with a complete user flow and interactive Figma prototype. Built during internship at Digitals Daddy.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">Figma</span>
+                <span class="stack-tag">Mobile UI</span>
+                <span class="stack-tag">Prototyping</span>
+                <span class="stack-tag">User Flow</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://www.figma.com/proto/ATtBLTVeMce4WSDrVECnWp/Untitled?node-id=81-2902&starting-point-node-id=81%3A2902&locale=en" target="_blank" class="proj-link">View Prototype ↗</a>
+            </div>
+        </div>
+
+        <!-- 6. Task Manager -->
+        <div class="proj-card">
+            <span class="proj-num">06</span>
+            <div class="proj-badge badge-web">✦ Front-end</div>
+            <h3>Task Manager Application</h3>
+            <p>A task management app with CRUD operations, category filtering via a UI slider, and async data handling. Built with TypeScript and deployed on Vercel for seamless accessibility.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">TypeScript</span>
+                <span class="stack-tag">React.js</span>
+                <span class="stack-tag">Node.js</span>
+                <span class="stack-tag">Vercel</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://task-manager-frontend-rust.vercel.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr" target="_blank" class="proj-link sec">GitHub</a>
+            </div>
+        </div>
+
+        <!-- 7. Finlens -->
+        <div class="proj-card">
+            <span class="proj-num">07</span>
+            <div class="proj-badge badge-ai">✦ AI · Finance</div>
+            <h3>Finlens</h3>
+            <p>An AI-powered financial management web app providing real-time insights, analytics, and forecasting to help businesses make data-driven decisions. Integrates financial data for intelligent reporting.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">JavaScript</span>
+                <span class="stack-tag">AI Integration</span>
+                <span class="stack-tag">Analytics</span>
+                <span class="stack-tag">Forecasting</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://finlens-alpha.vercel.app/" target="_blank" class="proj-link">Live Demo ↗</a>
+                <a href="https://github.com/gurkirankaurr" target="_blank" class="proj-link sec">GitHub</a>
+            </div>
+        </div>
+
+        <!-- 8. Grocery App Redesign -->
+        <div class="proj-card">
+            <span class="proj-num">08</span>
+            <div class="proj-badge badge-design">✦ UI/UX · Figma</div>
+            <h3>Grocery App Redesign</h3>
+            <p>A complete UI/UX redesign of a grocery shopping app. Focused on intuitive navigation, clean layouts, and streamlined checkout processes — crafted in Figma.</p>
+            <div class="proj-stack">
+                <span class="stack-tag">Figma</span>
+                <span class="stack-tag">UI/UX Design</span>
+                <span class="stack-tag">Prototyping</span>
+            </div>
+            <div class="proj-links">
+                <a href="https://www.figma.com/design/dLI929HwqnMmBaXgypKOVT/Grocery-App-Redesign?node-id=0-1&t=SiNNeNJ4ODu9dy8Z-0" target="_blank" class="proj-link">View in Figma ↗</a>
+            </div>
+        </div>
+
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+        <a href="https://github.com/gurkirankaurr" target="_blank" class="btn btn-ghost">View All Repos on GitHub ↗</a>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="sec-header">
+        <span class="sec-num">03</span>
+        <h2>Skills &amp; Tools</h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="skills-wrap">
+        <div class="skill-group">
+            <div class="sg-title">Languages</div>
+            <div class="sg-tags">
+                <span class="sg-tag">JavaScript</span>
+                <span class="sg-tag">TypeScript</span>
+                <span class="sg-tag">Java</span>
+                <span class="sg-tag">C++</span>
+                <span class="sg-tag">Python</span>
+                <span class="sg-tag">HTML5</span>
+                <span class="sg-tag">CSS3</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="sg-title">Frontend</div>
+            <div class="sg-tags">
+                <span class="sg-tag">React.js</span>
+                <span class="sg-tag">Next.js</span>
+                <span class="sg-tag">Responsive Design</span>
+                <span class="sg-tag">Animations</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="sg-title">Backend</div>
+            <div class="sg-tags">
+                <span class="sg-tag">Node.js</span>
+                <span class="sg-tag">Express.js</span>
+                <span class="sg-tag">REST APIs</span>
+                <span class="sg-tag">Multer</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="sg-title">Databases</div>
+            <div class="sg-tags">
+                <span class="sg-tag">MySQL</span>
+                <span class="sg-tag">MongoDB</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="sg-title">Design &amp; Dev Tools</div>
+            <div class="sg-tags">
+                <span class="sg-tag">Figma</span>
+                <span class="sg-tag">Canva</span>
+                <span class="sg-tag">Git</span>
+                <span class="sg-tag">GitHub</span>
+                <span class="sg-tag">VS Code</span>
+                <span class="sg-tag">Vercel</span>
+                <span class="sg-tag">VPS</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="sg-title">Currently Exploring</div>
+            <div class="sg-tags">
+                <span class="sg-tag">Streamlit</span>
+                <span class="sg-tag">ML Algorithms</span>
+                <span class="sg-tag">AI Integration</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+    <div class="sec-header">
+        <span class="sec-num">04</span>
+        <h2>Achievements &amp; Certifications</h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="ach-grid">
+        <div class="ach-card">
+            <div class="ach-icon">🏅</div>
+            <div class="ach-title">IBM SkillsBuild</div>
+            <div class="ach-sub">Frontend Web Development Certificate — completed IBM's official certification program.</div>
+            <div class="ach-date">Jul 2025 – Aug 2025</div>
+        </div>
+        <div class="ach-card">
+            <div class="ach-icon">📜</div>
+            <div class="ach-title">Udemy Full Stack Bootcamp</div>
+            <div class="ach-sub">The Complete Full Stack Web Development Bootcamp — comprehensive end-to-end web development course.</div>
+            <div class="ach-date">Sept 2025</div>
+        </div>
+        <div class="ach-card">
+            <div class="ach-icon">⚡</div>
+            <div class="ach-title">LeetCode &amp; Coding Contests</div>
+            <div class="ach-sub">Regularly solving problems on LeetCode and participating in contests to sharpen problem-solving skills.</div>
+            <div class="ach-date">Ongoing</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="contact-inner">
+        <p class="contact-headline">Let's build something great together.</p>
+        <p class="contact-sub">
+            I'm open to internships, full-time roles, and collaborations.<br>
+            If you have something exciting in mind — I'd love to hear from you.
+        </p>
+        <div class="contact-links">
+            <a href="mailto:gurkirank64@gmail.com" class="c-link primary">gurkirank64@gmail.com</a>
+            <a href="https://www.linkedin.com/in/gurkiran-kaur-0308081b5/" target="_blank" class="c-link outline">LinkedIn ↗</a>
+            <a href="https://github.com/gurkirankaurr" target="_blank" class="c-link outline">GitHub ↗</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span>© 2026 Gurkiran Kaur · All rights reserved</span>
+    <span>New Delhi, India</span>
+    <span>gurkirank64@gmail.com</span>
+</footer>
+
 </body>
 </html>
